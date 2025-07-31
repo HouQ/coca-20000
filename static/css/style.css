@@ -1,0 +1,952 @@
+/* 基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #000000;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 标题 */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.title {
+    color: white;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.menu-container {
+    position: relative;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+    position: relative;
+}
+
+.sidebar-nav {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background: #111;
+    padding-top: 60px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+}
+
+.sidebar-nav.open {
+    right: 0;
+}
+
+.sidebar-nav .nav-link {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #333;
+}
+
+.sidebar-nav .nav-link:hover {
+    background: #333;
+}
+
+/* 单词卡片 */
+.word-card {
+    cursor: pointer;
+    background: #1a1a1a; /* 深灰色背景 */
+    border-radius: 20px 20px 0 0; /* Top corners rounded */
+    padding: 60px 30px 20px 30px; /* Adjusted padding */
+    margin: 20px 0 0 0; /* Removed bottom margin */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.definition-box {
+    background: #1a1a1a;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    color: #eee;
+    line-height: 1.6;
+}
+
+.word-stats-corner {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 12px;
+    color: #888;
+}
+
+.progress-corner {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 12px;
+    color: #888;
+}
+
+.word {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #ffffff; /* 白色文字 */
+    word-break: break-word;
+}
+
+/* 按钮容器 */
+.button-container {
+    background: #1a1a1a; /* Match card background */
+    border-radius: 0 0 20px 20px; /* Bottom corners rounded */
+    padding: 20px 30px 30px 30px; /* Adjusted padding */
+    margin: 0 0 20px 0; /* Removed top margin */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+
+
+
+
+.btn {
+    flex: 1;
+    padding: 20px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+.btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.btn-mastered {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+}
+
+.btn-study {
+    background: linear-gradient(45deg, #2196F3, #1976D2);
+    color: white;
+}
+
+.count {
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    opacity: 0.9;
+}
+
+.highlight-number {
+    color: #FFD700; /* 金色 */
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* 时间范围选择器 */
+.period-selector {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.period-selector button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.period-selector button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.period-selector button.active {
+    background: linear-gradient(45deg, #2196F3, #1976D2);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* 头部导航 */
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.back-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 15px;
+}
+
+.header h1 {
+    color: white;
+    font-size: 1.5rem;
+    flex: 1;
+    text-align: center;
+    margin-right: 60px; /* 平衡左侧按钮 */
+}
+
+.period-info {
+    color: rgba(255,255,255,0.8);
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* 单词详情页 */
+.word-detail {
+    background: #1a1a1a; /* 深灰色背景 */
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.word-main {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #333; /* 深色边框 */
+}
+
+.word-main .word {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #ffffff; /* 白色文字 */
+}
+
+.word-stats {
+    font-size: 0.9rem;
+    color: #ccc; /* 浅灰色文字 */
+    text-align: center;
+    margin-top: 8px;
+}
+
+.review-count {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.phonetic {
+    font-size: 1.2rem;
+    color: #ccc; /* 浅灰色文字 */
+    margin-bottom: 15px;
+}
+
+.play-btn {
+    background: #FF9800;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* 定义、用法、例句等 */
+.definitions, .usage, .examples, .memory-tip {
+    margin-bottom: 25px;
+}
+
+.definitions h3, .usage h3, .examples h3, .memory-tip h3 {
+    color: #ffffff; /* 白色文字 */
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    border-left: 4px solid #667eea;
+    padding-left: 10px;
+}
+
+.definition {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.part {
+    font-weight: bold;
+    color: #667eea;
+    margin-right: 8px;
+}
+
+.meaning {
+    color: #555;
+}
+
+.usage p, .memory-tip p {
+    line-height: 1.6;
+    color: #666;
+}
+
+.example {
+    background: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 3px solid #667eea;
+    font-style: italic;
+}
+
+/* 学习页面按钮 */
+.study-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    width: 100%;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+}
+
+.btn-action {
+    flex: 1;
+    background-color: #1f1f1f;
+    color: white;
+    border: none;
+    padding: 20px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-action:hover {
+    background-color: #333;
+}
+
+.btn-master {
+    border-top: 2px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.btn-next {
+    border-top: 2px solid #2196F3;
+    color: #2196F3;
+}
+
+.btn-action .icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
+.btn-next:hover .icon {
+    transform: translateX(5px);
+}
+
+/* 单词列表 */
+.word-list {
+    margin-top: 20px;
+}
+
+.word-item {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.unmaster-btn {
+    padding: 6px 12px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s;
+}
+
+.unmaster-btn:hover {
+    background: #ff5252;
+    transform: translateY(-1px);
+}
+
+/* 分页按钮样式 */
+.page-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #666, #555);
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    min-width: 80px;
+}
+
+.page-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.page-btn:hover:not(:disabled) {
+    background: linear-gradient(45deg, #777, #666);
+}
+
+.page-btn:disabled {
+    background: #333;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* 导航按钮样式 */
+.nav-btn {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    background: linear-gradient(45deg, #666, #555);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.nav-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.nav-btn:hover {
+    background: linear-gradient(45deg, #777, #666);
+}
+
+.nav-btn:disabled {
+    background: #333;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.nav-btn i {
+    font-size: 1.2em;
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.btn-mastered {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+}
+
+.btn-study {
+    background: linear-gradient(45deg, #2196F3, #1976D2);
+    color: white;
+}
+
+.count {
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    opacity: 0.9;
+}
+
+/* 头部导航 */
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.back-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 15px;
+}
+
+.header h1 {
+    color: white;
+    font-size: 1.5rem;
+    flex: 1;
+    text-align: center;
+    margin-right: 60px; /* 平衡左侧按钮 */
+}
+
+.period-info {
+    color: rgba(255,255,255,0.8);
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* 单词详情页 */
+.word-detail {
+    background: #1a1a1a; /* 深灰色背景 */
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.word-main {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #333; /* 深色边框 */
+}
+
+.word-main .word {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #ffffff; /* 白色文字 */
+}
+
+.word-stats {
+    font-size: 0.9rem;
+    color: #ccc; /* 浅灰色文字 */
+    text-align: center;
+    margin-top: 8px;
+}
+
+.review-count {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.phonetic {
+    font-size: 1.2rem;
+    color: #ccc; /* 浅灰色文字 */
+    margin-bottom: 15px;
+}
+
+.play-btn {
+    background: #FF9800;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* 定义、用法、例句等 */
+.definitions, .usage, .examples, .memory-tip {
+    margin-bottom: 25px;
+}
+
+.definitions h3, .usage h3, .examples h3, .memory-tip h3 {
+    color: #ffffff; /* 白色文字 */
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    border-left: 4px solid #667eea;
+    padding-left: 10px;
+}
+
+.definition {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.part {
+    font-weight: bold;
+    color: #667eea;
+    margin-right: 8px;
+}
+
+.meaning {
+    color: #555;
+}
+
+.usage p, .memory-tip p {
+    line-height: 1.6;
+    color: #666;
+}
+
+.example {
+    background: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 3px solid #667eea;
+    font-style: italic;
+}
+
+/* 学习页面按钮 */
+.study-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    width: 100%;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+}
+
+.btn-action {
+    flex: 1;
+    background-color: #1f1f1f;
+    color: white;
+    border: none;
+    padding: 20px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-action:hover {
+    background-color: #333;
+}
+
+.btn-master {
+    border-top: 2px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.btn-next {
+    border-top: 2px solid #2196F3;
+    color: #2196F3;
+}
+
+.btn-action .icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
+.btn-next:hover .icon {
+    transform: translateX(5px);
+}
+
+/* 单词列表 */
+.word-list {
+    margin-top: 20px;
+}
+
+.word-item {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.unmaster-btn {
+    padding: 6px 12px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s;
+}
+
+.unmaster-btn:hover {
+    background: #ff5252;
+    transform: translateY(-1px);
+}
+
+/* 导航按钮样式 - 移除绝对定位，让其在按钮容器内正常显示 */
+
+.page-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+    margin: 0 10px;
+}
+
+.total-info {
+    font-size: 12px;
+    color: #999;
+    margin-top: 2px;
+}
+
+/* 分页控件样式 */
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+    background: #f0f0f0; /* 更明显的背景色 */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.pagination .page-info {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    color: #333; /* 更深的文字颜色 */
+    font-weight: bold;
+}
+
+.pagination .total-info {
+    font-size: 14px;
+    color: #666; /* 更深的文字颜色 */
+    margin-top: 4px;
+    display: block;
+}
+
+.word-item .word {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.review-count {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.word-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mastered {
+    color: #4CAF50;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.recent-time {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.empty {
+    text-align: center;
+    color: rgba(255,255,255,0.8);
+    margin-top: 50px;
+    font-size: 1.1rem;
+}
+
+.loading {
+    text-align: center;
+    color: white;
+    margin-top: 50px;
+    font-size: 1.2rem;
+}
+
+/* 弹窗样式 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 300px;
+    width: 90%;
+    text-align: center;
+    color: #333;
+    position: relative;
+}
+
+.modal-content h2 {
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    text-align: left;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.modal-content .formatted-definition {
+    text-align: left;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.modal-content h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.modal-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #667eea;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.modal-btn:hover {
+    background: #5a6fd8;
+}
+
+.modal-btn.cancel {
+    background: #ccc;
+    color: #666;
+}
+
+.modal-btn.cancel:hover {
+    background: #bbb;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .word-card {
+        padding: 40px 20px;
+        min-height: 150px;
+    }
+    
+    .word {
+        font-size: 1.8rem;
+    }
+    
+    .btn {
+        padding: 15px;
+        font-size: 1rem;
+    }
+    
+    .word-detail {
+        padding: 20px;
+    }
+    
+    .word-main .word {
+        font-size: 2rem;
+    }
+}

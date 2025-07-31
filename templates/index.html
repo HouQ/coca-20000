@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记单词 - COCA 20000</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/vue.global.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/axios.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/confetti.browser.min.js') }}"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="header-container">
+                <h3 class="title">也就<span class="highlight-number" v-text="stats.unmastered"></span>个单词</h3>
+                <div class="menu-container">
+                    <button class="menu-toggle" @click="toggleMenu">&#9776;</button>
+                    <nav class="sidebar-nav" :class="{ 'open': isMenuOpen }">
+                        <a href="/mastered" class="nav-link">已掌握单词列表</a>
+                        <a href="/recent" class="nav-link">最近学习列表</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="word-card" @click="toggleDefinition">
+                <div class="word" v-if="currentWord" v-text="currentWord.word"></div>
+                <div class="word" v-else>加载中...</div>
+                <div class="word-stats-corner" v-if="currentWord">
+                    已学习 <span class="review-count" v-text="currentWord.review_count || 0"></span> 次
+                </div>
+                <div class="progress-corner" v-if="currentWord && currentWord.progress">
+                    进度: <span v-text="currentWord.progress"></span>
+                </div>
+            </div>
+
+            <div class="definition-box" v-if="showDefinition && currentWord && currentWord.definition">
+                <p v-html="currentWord.definition.replace(/\n/g, '<br>')"></p>
+            </div>
+
+            <div class="button-container">
+                <div class="button-group">
+                    <button 
+                        class="btn btn-mastered" 
+                        @click="masterWord"
+                    >
+                        已掌握
+                        <span class="count" v-text="stats.mastered"></span>
+                    </button>
+                    
+                    <button 
+                        class="btn btn-study" 
+                        @click="studyWord"
+                    >
+                        需学习
+                        <span class="count" v-text="stats.unmastered"></span>
+                    </button>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="nav-btn btn prev-btn" @click.stop="getWord('prev')">&#8592; 上一个</button>
+                    <button class="nav-btn btn next-btn" @click.stop="getWord('next')">下一个 &#8594;</button>
+                </div>
+            </div>
+            
+            <!-- 最近学习选项弹窗 -->
+            <div class="modal" v-if="showRecentModal" @click="closeRecentModal">
+                <div class="modal-content" @click.stop>
+                    <h3>选择时间范围</h3>
+                    <button class="modal-btn" @click="goToRecent('1day')">最近一天</button>
+                    <button class="modal-btn" @click="goToRecent('7days')">最近7天</button>
+                    <button class="modal-btn" @click="goToRecent('1month')">最近一个月</button>
+                    <button class="modal-btn cancel" @click="closeRecentModal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

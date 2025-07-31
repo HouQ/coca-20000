@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最近学习单词</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/vue.global.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/axios.min.js') }}"></script>
+</head>
+<body>
+    <div id="recent-app">
+        <div class="container">
+            <div class="header">
+                <button class="back-btn" @click="goBack">← 返回</button>
+                <h1>最近学习 (<span v-text="total"></span>)</h1>
+            </div>
+            <div class="period-selector">
+                <button @click="changePeriod('1day', '最近1天')" :class="{ 'active': period === '1day' }">最近1天</button>
+                <button @click="changePeriod('7days', '最近7天')" :class="{ 'active': period === '7days' }">最近7天</button>
+                <button @click="changePeriod('1month', '最近1个月')" :class="{ 'active': period === '1month' }">最近1个月</button>
+            </div>
+            <div class="word-list">
+                <div v-for="word in recentWords" :key="word.id" class="word-item">
+                    <div class="word-info" @click="showWordDetails(word)">
+                        <span class="word" v-text="word.word"></span>
+                        <span class="mastered" v-if="word.mastered">✓ 已掌握</span>
+                    </div>
+                    <div class="word-stats-list">
+                         学习 <span v-text="word.review_count"></span> 次
+                    </div>
+                    <div class="meta">
+                        <span class="recent-time" v-text="formatTime(word.recent_time)"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="empty" v-if="recentWords.length === 0">
+                该时间段内没有学习记录
+            </div>
+            
+            <!-- 分页控件 -->
+            <div v-if="totalPages > 1" class="pagination">
+                <button @click="previousPage" :disabled="currentPage <= 1 || loading" class="page-btn">
+                    上一页
+                </button>
+                
+                  <div class="page-info">
+                    <span>第 <span v-text="currentPage"></span> / <span v-text="totalPages"></span> 页</span>
+                    <span class="total-info">（共 <span v-text="total"></span> 个单词）</span>
+                </div>
+             
+                
+                <button @click="nextPage" :disabled="currentPage >= totalPages || loading" class="page-btn">
+                    下一页
+                </button>
+            </div>
+            
+            <div v-if="loading" class="loading">
+                正在加载...
+            </div>
+        </div>
+
+        <!-- 单词详情弹窗 -->
+        <div v-if="showDetailsModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" @click="closeDetailsModal">&times;</span>
+                <div v-if="wordDetails">
+                    <h2 v-text="wordDetails.word"></h2>
+                    <p><strong>音标:</strong> <span v-text="wordDetails.phonetic"></span></p>
+                    <p><strong>释义:</strong></p>
+                    <div v-html="formattedDefinition"></div>
+                </div>
+                <div v-else class="loading">
+                    正在加载...
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/recent.js') }}"></script>
+</body>
+</html>

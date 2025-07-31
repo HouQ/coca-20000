@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习单词</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/vue.global.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/axios.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/confetti.browser.min.js') }}"></script>
+</head>
+<body>
+    <div id="study-app">
+        <div class="container">
+            <div class="header">
+                <button class="back-btn" @click="goBack">← 返回</button>
+                <h1>单词学习</h1>
+            </div>
+            
+            <div class="word-detail" v-if="wordDetails">
+                <div class="word-main">
+                    <h2 class="word" v-text="wordDetails.word"></h2>
+                <div class="phonetic" v-text="wordDetails.phonetic"></div>
+                    <button class="play-btn" @click="playAudio">🔊 播放</button>
+                </div>
+                
+                <div class="definitions" v-if="wordDetails.definition">
+                    <h3>释义</h3>
+                    <div class="definition">
+                        <p v-html="wordDetails.definition.replace(/\n/g, '<br>')"></p>
+                    </div>
+                </div>
+
+                <div class="english-definitions" v-if="wordDetails.api_definition">
+                    <h3>英文释义</h3>
+                    <div class="definition">
+                        <p v-html="wordDetails.api_definition.replace(/\n/g, '<br>')"></p>
+                    </div>
+                </div>
+                
+                <div class="study-actions">
+                    <button class="btn-action btn-master" @click="masterAndReturn">
+                        <span class="icon">✓</span>
+                        <span>已掌握</span>
+                    </button>
+                    <button class="btn-action btn-next" @click="getNextWord">
+                        <span>继续学习</span>
+                        <span class="icon">→</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="loading" v-else>
+                正在加载单词详情...
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/study.js') }}"></script>
+</body>
+</html>
